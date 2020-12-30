@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Ajax</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<style>
+    * {
+        width: auto
+    }
+
+    main {
+        padding: 1rem
+    }
+
+    label {display: block}
+</style>
+
+<body>
+    <!-- <header>
+        <nav>
+            <ul>
+                <li><a href="#">home</a></li>
+                <li><a href="about.html" onclick="LoadHome()">about</a></li>
+                <li><a href="">login</a></li>
+            </ul> 
+        </nav>
+    </header> -->
+
+    <main>
+        <h2>Get Data</h2>
+        <form id="getFes">
+            <label for="getId"><b>Enter your id:</b></label>
+            <input type="number" class="form-group" id="getId" />
+        </form>
+        <h2>Post Data</h2>
+        <!-- Post -->
+        <form id="postFes">
+            <div>
+                <label for="getId">Enter your Name Category:</label>
+                <select id="listCategory"></select>
+            </div>
+
+            <div>
+                <label for="Nav">Enter name Nav:</label>
+                <select id="NameNav"></select>
+            </div>
+
+            <fieldset>
+                <legend>Select Information Fes</legend>
+                <label for="idFes">id</label>
+                <input type="text" id="idFes">
+                <label for="NameFes">Name</label>
+                <input type="text" id="NameFes">
+                <label for="imgFes">image</label>
+                <input type="file" id="imgFes">
+                <label for="desFes">Description</label>
+                <textarea name="" id="desFes" cols="30" rows="10"></textarea>
+                <label for="priceFes">Price</label>
+                <input type="text" id="priceFes">
+                <label for="saleFes">Sale</label>
+                <input type="text" id="saleFes">
+                <label for="timeFFes">Time First</label>
+                <input type="text" id="timeFFes">
+                <label for="timeLFes">Time Last</label>
+                <input type="text" id="timeLFes"> 
+            </fieldset>
+
+            <input type="submit" value="Add" class="btn btn-success">
+
+        </form>
+
+        <div id="demo" class="row bg-white">
+        </div>
+    </main>
+    <script>
+        // Get id input get festivals
+        const getId = document.querySelector("#getId");
+        getId.addEventListener('keyup', e => { Show(getId.value); getId.value = '' });
+
+        // Get id category
+        const getCategory = document.querySelector("#listCategory");
+
+        // Get id NavName
+        const getNavName = document.querySelector("#NameNav");
+
+        // Get Category function
+        function GetCategories() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("Get", "https://localhost:44377/api/FestivalCategory", true);
+            xhr.send();
+
+            xhr.onreadystatechange = function () {
+                if (this.status == 200 && this.readyState == XMLHttpRequest.DONE) {
+                    let data = JSON.parse(this.responseText);
+
+                    for (let i in data) {
+                        getCategory.innerHTML +=
+                            `<option value="${data[i].id}">${data[i].name}</option>`;
+                    }
+                }
+            }
+        }
+        /* Call Function category*/ GetCategories();
+
+        // Get nav name function
+        function GetNavName() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("Get", "https://localhost:44377/api/NavMiniHome", true);
+            xhr.send();
+
+            xhr.onreadystatechange = function () {
+                if (this.status == 200 && this.readyState == XMLHttpRequest.DONE) {
+                    let data = JSON.parse(this.responseText);
+
+                    for (let i in data) {
+                        getNavName.innerHTML +=
+                            `<option value="${data[i].id}">${data[i].name}</option>`;
+                    }
+                }
+            }
+
+        }
+        /* Call Function category*/ GetNavName();
+
+        //Get Festival function
+        function Show(num) {
+            let demo = document.querySelector("#demo");
+            const http = new XMLHttpRequest();
+            http.open("Get", "https://localhost:44377/api/Festivals/festivalDes/" + num, true);
+            http.send();
+
+            // console.log(http);
+            http.onreadystatechange = function () {
+                // Headers Received 
+                // if (this.readyState == XMLHttpRequest.HEADERS_RECEIVED && this.status == 200) {
+                //     alert("Headers Received: " + this.readyState);
+                // }
+
+                // Loading document
+                // if (this.readyState == XMLHttpRequest.LOADING && this.status == 200) {
+                //     alert("Loading, readyState: " + this.readyState);
+                // }
+
+                //DONE 100%
+                if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                    let data = JSON.parse(this.responseText)[0];
+                    console.log(data)
+                    demo.innerHTML +=
+                        '<div class="col-4 mb-4  float-left">' +
+                        '<div class="card border-info">' +
+                        '<img src="./images/' + data.img + '" class="card-img-top" alt="' + data.img + '">' +
+                        '<div class="card-body">' +
+                        '<h5 class="card-title">' + data.name + '</h5>' +
+                        '<p class="card-text">' + data.price + '</p>' +
+                        '<span class="card-text">' + data.timeFirst + '</span>' +
+                        '<span class="card-text">' + data.timeLast + '</span>' +
+                        '<p class="card-text">' + data.description + '</p>' +
+                        '<a href="#" class="btn btn-primary">Go somewhere</a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                }
+
+                else if (this.status == 404) {
+                    demo.innerHTML = "404 not found";
+                }
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
