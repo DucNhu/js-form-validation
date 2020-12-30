@@ -1,0 +1,89 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    padding: 1rem;
+}
+
+form {
+    box-shadow: 0px 0px 5px gray;
+    background: #b92b27; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1565c0, #b92b27); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #1565c0,
+        #b92b27
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    border-radius: 1rem !important;
+}
+
+.box-action {
+    display: flex;
+    flex-direction: column;
+
+    margin: 1.8rem 0rem;
+    position: relative;
+}
+
+label {
+    font-size: 24px;
+    color: white;
+    padding-left: 1rem;
+}
+
+input {
+    line-height: 4rem;
+    border: none;
+    border-radius: 25px !important;
+    outline: none;
+
+    padding-left: 1rem;
+    font-size: 1.5rem;
+}
+
+    input:focus {
+        transform: scale(1.1);
+        transition: 0.5s;
+    }
+
+::placeholder {
+    font-size: 10px;
+}
+
+button {
+    color: white !important;
+    border: 2px solid white !important;
+
+    background-color: transparent !important;
+}
+
+button:hover {
+    transform: scale(1.5);
+    transition: 0.5s;
+}
+
+.pl-1 {
+    padding-left: 1rem;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+input.input-error {
+    box-shadow: inset 0px 0px 5px red;
+}
+
+.input-error::placeholder {
+    color: red;
+}
+
+p.box-error {
+    position: absolute;
+    bottom: -20%;
+    /* right: 0; */
+}
+

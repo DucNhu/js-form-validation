@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title><!--  -->
+    <link rel="stylesheet" href="style.css">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- GG font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100;1,300&display=swap"
+        rel="stylesheet">
+    <!-- link reset -->
+    <link rel="stylesheet" href="/resetCss/reset.css">
+    <!--  -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="text-center">Form validation version Mobile</h1>
+    <form action="" class="form-control" id="form-login">
+        <div class="box-action">
+            <label for="userName">User Name</label>
+            <input type="text" id="userName" placeholder="eg, Nhu Hoang Minh Duc" required>
+            <p class="text-white pl-1 font-weight-bold box-error d-none">Enter your name, pls</p>
+        </div>
+        <div class="box-action">
+            <label for="user">Email</label>
+            <input type="email" id="email" placeholder="eg, 1234@gmail.com" required>
+            <p class="text-white pl-1 font-weight-bold box-error d-none">Enter your email, pls</p>
+        </div>
+        <div class="box-action">
+            <label for="pass">Pass Word</label>
+            <input type="password" id="pass" placeholder="*****" required minlength="6">
+            <p class="text-white pl-1 font-weight-bold box-error d-none">Enter your pass, pls</p>
+        </div>
+        <div class="box-action">
+            <label for="cfpass">Confirm Pass Word</label>
+            <input type="password" id="cfpass" placeholder="*****" required minlength="6">
+            <p class="text-white pl-1 font-weight-bold box-error d-none">Enter your cf pass, pls</p>
+        </div>
+        <div><button type="submit" id="submit" class="mx-auto d-block btn">Submit</button></div>
+    </form>
+</body>
+<script src="validation.js"></script>
+<script>
+    Validator({
+        form: "#form-login",
+        rules: [
+            Validator.isRequied("#userName"),
+            Validator.isRequied("#pass"),
+            Validator.isEmail("#email"),
+            Validator.isRequied("#cfpass")
+        ]
+    });
+</script>
+</html>
