@@ -4,17 +4,40 @@ html {
 
 body {
     font-family: "Roboto", sans-serif;
-    padding: 1rem;
+    background-image: url("upskill/backgroundBody.png");
+    background-color: #008000ad;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+}
+
+@media (min-width: 500px) {
+    main {
+        width: 250px;
+        height: 500px;
+        position: relative;
+    }
+}
+
+
+h1 {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-style: italic;
 }
 
 form {
     box-shadow: 0px 0px 5px gray;
-    background: #b92b27; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #1565c0, #b92b27); /* Chrome 10-25, Safari 5.1-6 */
+    background: rgb(34, 193, 195);
     background: linear-gradient(
-        to right,
-        #1565c0,
-        #b92b27
+        149deg,
+        rgba(34, 193, 195, 1) 0%,
+        rgba(253, 187, 45, 1) 100%
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     border-radius: 1rem !important;
@@ -44,10 +67,10 @@ input {
     font-size: 1.5rem;
 }
 
-    input:focus {
-        transform: scale(1.1);
-        transition: 0.5s;
-    }
+input:focus {
+    transform: scale(1.1);
+    transition: 0.5s;
+}
 
 ::placeholder {
     font-size: 10px;
@@ -86,4 +109,3 @@ p.box-error {
     bottom: -20%;
     /* right: 0; */
 }
-
