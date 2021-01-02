@@ -47,17 +47,24 @@
                 <input type="password" id="cfpass" placeholder="*****" required minlength="6">
                 <p class="text-white pl-1 font-weight-bold box-error d-none">Enter your true pass, pls</p>
             </div>
-            <div><button type="submit" id="submit" class="mx-auto d-block btn">Submit</button></div>
+            <div>
+                <button type="submit" id="submit" class="mx-auto d-block btn">Submit</button> 
+            </div>
+            <!-- <div class="text-right">
+                    <input type="reset" value="Cancel">
+            </div> -->
         </form>
     </main>
 </body>
 <script src="validation.js"></script>
 <script>
+    // List rules
     isRequied("#userName");
-    // isRequied("#pass");
-    isMail("#email");
+    isRequied("#email");
+    isMail("#email", "this is not email, pls try again");
     cfPass("#pass", "#cfpass");
     minlength("#pass", "Enter your pass, plss");
+
 </script>
 
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +18,10 @@
     <!--  -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <main>
-            <h1 class="text-center">Form validation version Mobile</h1>
+        <h1 class="text-center">Form validation version Mobile</h1>
 
         <div class="frame">
             <form action="" class="form-control" id="form-login">
@@ -55,9 +57,11 @@
         rules: [
             Validator.isRequied("#userName"),
             Validator.isRequied("#pass"),
+            Validator.isRequied("#email"),
             Validator.isEmail("#email"),
             Validator.isRequied("#cfpass")
         ]
     });
 </script>
+
 </html>

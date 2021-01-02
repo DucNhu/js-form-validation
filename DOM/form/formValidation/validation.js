@@ -2,14 +2,22 @@
 function Validator(obj) {
     // Lay ra form nguoi dung blur
     var formElement = document.querySelector(obj.form);
-    
+    var selectorRules = {};
     // Hàm check lỗi
     function validate(inputElement, rule) {
-        // console.log(rule)
+        console.log(rule)
         // Biến error được gắn giá trị của hàm isRequied()? undefined : "Enter your email, pls",
         // Sẽ dùng để check xem có xảy ra lỗi hay không, nếu underfined thì else xảy ra!!!
         let error = rule.functionCheck(inputElement.value); // Gọi function check, vj tri function: trong obj của mảng đó
         let boxError_Element = inputElement.parentElement.querySelector(".box-error"); // Lấy tất cả element có class box-error
+        
+        // Lấy ra rules của selector (function)
+        var rules = selectorRules[rule.selector]; // vì key của obj selectoRules được gắn là tên selector
+        // Lặp qua từ mảng của rules
+        for(let i = 0; i < rules.length; i++) {
+            error = rules[i](inputElement.value);// Gắn cho hàm error
+            if(error) { break;}
+        }
 
         if (error) {
             boxError_Element.classList.remove("d-none");
@@ -25,10 +33,22 @@ function Validator(obj) {
     if (formElement) {
         // Nhặt ra element mà người dùng blur (chú ý key "rules" là 1 array)
         obj.rules.forEach(element => { //Element lúc này là object của element,
-            //  mảng 0 của array là gọi thuộc tính isRequied ( thực chất là hàm),
+            // Mảng 0 của array là gọi thuộc tính isRequied ( thực chất là hàm),
             // mà hàm này nó return về 1 obj (line 37) nên tham số element trả về 1 obj (gồm những key, value trong return dòng 37).
             // gắn giá trị cho biến inputElement là element của form được blur
+
+            // Lưu các rules mỗi input
+            if (Array.isArray(selectorRules[element.selector])) {
+                selectorRules[element.selector].push(element.functionCheck);
+            } else {
+                selectorRules[element.selector] = [element.functionCheck];
+            }
+            // 
+            console.log(selectorRules);
+
             let inputElement = formElement.querySelector(element.selector);
+
+            
             // Nếu có element đó:
             if (inputElement) {
                 // Khi blur nó, function sẽ chạy

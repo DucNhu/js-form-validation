@@ -1,10 +1,16 @@
 // Function error mess
-function error(id) {
+var selectorRules = {};
+
+function error(id, errorMess) {
     let user = document.querySelector(id);
     var box_error = user.parentElement.querySelector(".box-error");
 
     box_error.classList.remove('d-none');
     user.classList.add('input-error');
+    // Check người dùng làm việc với input thì hiện ra mess lỗi
+    user.oninput = function() {
+        box_error.innerText = errorMess || "";
+    }
 }
 // Function valid
 function valid(id) {
@@ -15,9 +21,9 @@ function valid(id) {
     user.classList.remove('input-error');
 }
 
-
 // Hàm bắt buộc người dùng phải nhập vào input
 function isRequied(id) {
+    console.log("Is requied()")
     let user = document.querySelector(id);
     // 2.Code xử lí trạng thái input khi người dùng blur ra ngoài
     user.onblur = function () {
@@ -39,11 +45,11 @@ function isRequied(id) {
 }
 
 // Hàm check email:
-function isMail(id) {
+function isMail(id, str) {
     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let email = document.querySelector(id);
     email.onblur = function () {
-        return regex.test(email.value) ? valid(id) : error(id);
+        return regex.test(email.value) ? valid(id) : error(id, str);
     }
 }
 
@@ -81,6 +87,7 @@ function minlength(id, str) {
     let minLenghtValue = element.getAttribute("minlength");
 
     element.onblur = function () {
+        // Check requied
         if (element.value.length == 0) {
             error(id);
             return box_error.innerText = str;
@@ -106,4 +113,10 @@ function minlength(id, str) {
 function validSubmit(bool) {
     let button = document.querySelector("#submit");
     return bool == true ? button.disabled = false : button.disabled = true;
+}
+
+
+
+function checkRulesLenght(arr) {
+    
 }
